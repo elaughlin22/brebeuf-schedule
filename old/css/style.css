@@ -1,0 +1,82 @@
+html {
+	background-color: rgb(134, 38, 51);
+	color: white;
+}
+
+div {
+	font-family: "Ubuntu",sans-serif;
+}
+
+p {
+	padding: 0px;
+	margin: 0px;
+}
+
+input {
+	padding: 8px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	margin-right: 2px;
+	border: 2px solid black;
+	font-size: 16px;
+}
+
+.title {
+	font-size: 64px;
+}
+
+.header {
+	font-size: 16px;
+	margin-top: 8px;
+}
+
+.button-unused {
+	display: inline-block;
+	padding: 14px;
+	margin-right: 8px;
+	margin-top: 7px;
+	background-color: white;
+	border: 2px solid gray;
+	color: gray;
+	text-decoration: none;
+	cursor: not-allowed;
+}
+.button {
+	display: inline-block;
+	padding: 16px;
+	margin-right: 8px;
+	margin-top: 7px;
+	background-color: rgb(134, 38, 51);
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+.button:hover {
+	padding: 14px;
+	background-color: white;
+	color: rgb(134, 38, 51);
+	border: 2px solid rgb(134, 38, 51);
+}
+
+#container {
+	position: absolute;
+	padding: 16px;
+	padding-top: 8px;
+	width: 816px;
+	height: adaptive;
+	background-color: white;
+	color: black;
+	margin-bottom: 16px;
+}
+
+#log {
+	position: relative;
+	width: 800px;
+	height: adaptive;
+	margin-top: 4px;
+	margin-bottom: 0px;
+	padding: 8px;
+	background-color: black;
+	color: white;
+	font-family: monospace;
+}

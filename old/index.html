@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>BJPS Calendar Generator</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,regular" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/days.js"></script>
+    <script type="text/javascript" src="js/function.js"></script>
+</head>
+
+<body>
+	<div class="title">Brebeuf Calendar Generator</div>
+	<div id="container">
+		<div>
+			<form>
+				<div class="header">Please fill out this form:</div>
+				<div class="header">Semester 1 Classes:</div>
+				<p><input id="1" placeholder="Period 1" /><input id="loc1" placeholder="Period 1 Room" /></p>
+				<p><input id="2" placeholder="Period 2" /><input id="loc2" placeholder="Period 2 Room" /></p>
+				<p><input id="3" placeholder="Period 3" /><input id="loc3" placeholder="Period 3 Room" /></p>
+				<p><input id="4" placeholder="Period 4" /><input id="loc4" placeholder="Period 4 Room" /></p>
+				<p><input id="5" placeholder="Period 5" /><input id="loc5" placeholder="Period 5 Room" /></p>
+				<p><input id="6" placeholder="Period 6" /><input id="loc6" placeholder="Period 6 Room" /></p>
+				<p><input id="7" placeholder="Period 7" /><input id="loc7" placeholder="Period 7 Room" /></p>
+				<p><input id="8" placeholder="Period 8" /><input id="loc8" placeholder="Period 8 Room" /></p>
+				<div class="header">Semester 2 Classes:</div>
+				<p><input id="9" placeholder="Period 1" /><input id="loc9" placeholder="Period 1 Room" /></p>
+				<p><input id="10" placeholder="Period 2" /><input id="loc10" placeholder="Period 2 Room" /></p>
+				<p><input id="11" placeholder="Period 3" /><input id="loc11" placeholder="Period 3 Room" /></p>
+				<p><input id="12" placeholder="Period 4" /><input id="loc12" placeholder="Period 4 Room" /></p>
+				<p><input id="13" placeholder="Period 5" /><input id="loc13" placeholder="Period 5 Room" /></p>
+				<p><input id="14" placeholder="Period 6" /><input id="loc14" placeholder="Period 6 Room" /></p>
+				<p><input id="15" placeholder="Period 7" /><input id="loc15" placeholder="Period 7 Room" /></p>
+				<p><input id="16" placeholder="Period 8" /><input id="loc16" placeholder="Period 8 Room" /></p>
+				<p class="header"><input id="prtBlank" type="checkbox" checked="true" />Leave PRTs blank?</p>
+				<div>
+					<p class="header">Instructions:</p>
+					<p>If you would like to leave your break period blank on your calendar, then leave its title blank.</p>
+					<p>Once the CSV file is downloaded, open Google Calendar.</p>
+					<p>Open the settings (near the top-right). The settings page will open.</p>
+					<p>On the left side of the page, select the menu option titled "Import & Export."</p>
+					<p>Select "Select file from your computer" and choose the CSV file downloaded from this page.</p>
+					<p>In the selection box "Add to calendar," choose the calendar where you want the schedule to go.</p>
+					<p>Select "Import." Wait for the page to respond. It might take a while, but you should get a confirmation message.</p>
+					<p>Return to your calendar. After a few seconds, the schedule for the school year will appear.</p>
+				</div>
+			</form>
+		</div>
+		<div><a onclick="beginGeneration()" id="submit" class="button">Generate CSV</a><a id="download" class="button-unused">Download CSV</a></div>
+		<p>Log:</p>
+		<div id="log" />
+	</div>
+</body>
+</html>

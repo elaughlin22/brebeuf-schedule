@@ -19,11 +19,11 @@ function createEvent(firstDate, secondDate) {
     'summary': 'test',
     'start': {
       'dateTime': firstDate.toISOString(),
-      'timeZone': 'America/Los_Angeles'
+      'timeZone': 'America/Indiana/Indianapolis'
     },
     'end': {
       'dateTime': secondDate.toISOString(),
-      'timeZone': 'America/Los_Angeles'
+      'timeZone': 'America/Indiana/Indianapolis'
     }
   };
   return event;
