@@ -5,7 +5,7 @@
 const API_KEY = 'AIzaSyAHzxZJfpp-RSjIVLAPy1TH8-4xAraOhu8';
 // need to be web application with origin url added
 const CLIENT_ID = '1061840141453-3gdbhsibjbfgg4tkocqsuu9uv39adkcq.apps.googleusercontent.com';
-const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
+const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/classroom/v1/rest'];
 const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/classroom.courses.readonly';
 
 var authorizeButton = document.getElementById('authorize-button');
@@ -38,12 +38,7 @@ function updateSigninStatus(isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
 
-    return batchEvents()
-      .then(function (response) {
-        console.log(response.result);
-      }).catch(function (reason) {
-        console.log(reason);
-      });
+    return main();
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
