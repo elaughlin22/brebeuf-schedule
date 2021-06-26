@@ -8,7 +8,12 @@ function batchEvents() {
     });
     batch.add(event, { 'id': i });
   }
-  return batch;
+  return batch
+  .then(function (response) {
+    console.log(response.result);
+  }).catch(function (reason) {
+    console.log(reason);
+  });
 }
 // add color and id
 
