@@ -2,11 +2,11 @@ function batchEvents() {
   const batch = gapi.client.newBatch();
   for (let i = 1; i < 5; i++) {
     const event = gapi.client.calendar.events.insert({
-      'calendarId': 'c_kpefo0ahrgt3ul1je9btul9n2g@group.calendar.google.com',
+      "calendarId": "c_kpefo0ahrgt3ul1je9btul9n2g@group.calendar.google.com",
       // month is 0-indexed
-      'resource': createEvent(new Date(2021, 6 - 1, i, 15), new Date(2021, 6 - 1, i, 16))
+      "resource": createEvent(new Date(2021, 6 - 1, i, 15), new Date(2021, 6 - 1, i, 16))
     });
-    batch.add(event, { 'id': i });
+    batch.add(event, { "id": i });
   }
   return batch
   .then(function (response) {
@@ -21,14 +21,14 @@ function batchEvents() {
 function createEvent(firstDate, secondDate) {
 
   var event = {
-    'summary': 'test',
-    'start': {
-      'dateTime': firstDate.toISOString(),
-      'timeZone': 'America/Indiana/Indianapolis'
+    "summary": "test",
+    "start": {
+      "dateTime": firstDate.toISOString(),
+      "timeZone": "America/Indiana/Indianapolis"
     },
-    'end': {
-      'dateTime': secondDate.toISOString(),
-      'timeZone': 'America/Indiana/Indianapolis'
+    "end": {
+      "dateTime": secondDate.toISOString(),
+      "timeZone": "America/Indiana/Indianapolis"
     }
   };
   return event;
