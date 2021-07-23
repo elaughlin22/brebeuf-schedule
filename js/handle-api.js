@@ -1,17 +1,19 @@
-// namespace may be needed
+gapi.load("client:auth2", start);
 
-// need to hide as secret in github repo
-const API_KEY = "AIzaSyAHzxZJfpp-RSjIVLAPy1TH8-4xAraOhu8";
+
+// need to hide as secret in github repo (restricted keys)
+const API_KEY = "AIzaSyD2M0TLLkXlK7TKFAG0dI7MgwhIJ4158Xk";
+
 // need to be web application with origin url added
-const CLIENT_ID = "1061840141453-3gdbhsibjbfgg4tkocqsuu9uv39adkcq.apps.googleusercontent.com";
-const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest", "https://www.googleapis.com/discovery/v1/apis/classroom/v1/rest"];
-const SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/classroom.courses.readonly";
-
+// need to setup localhost
+// enable apis, setup request screen
+const CLIENT_ID = "22227420304-65mol9e9a34j1c0an8vc1l0mab6m91sr.apps.googleusercontent.com";
+const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/classroom/v1/rest", "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+const SCOPES = "https://www.googleapis.com/auth/classroom.courses.readonly https://www.googleapis.com/auth/calendar";
+// updates
 var authorizeButton = document.getElementById("authorize-button");
 var signoutButton = document.getElementById("signout-button");
 
-// need to setup localhost
-gapi.load("client:auth2", start);
 
 function start() {
   gapi.client.init({
@@ -37,13 +39,14 @@ function updateSigninStatus(isSignedIn) {
     authorizeButton.style.display = "none";
     signoutButton.style.display = "block";
 
-    return main();
-    
+    return getCourses();
+
   } else {
     authorizeButton.style.display = "block";
     signoutButton.style.display = "none";
   }
 }
+
 
 function handleSignin() {
   gapi.auth2.getAuthInstance().signIn();
@@ -52,7 +55,3 @@ function handleSignin() {
 function handleSignout() {
   gapi.auth2.getAuthInstance().signOut();
 }
-
-
-// https://developers.google.com/calendar/v3/reference/events/insert#javascript
-// https://github.com/google/google-api-javascript-client/blob/master/docs
