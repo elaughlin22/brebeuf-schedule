@@ -12,23 +12,27 @@ function getCourses() {
 
 function createCourses(response) {
   const courses = response.result.courses;
-  // can be modified if format in classroom changes
-  const REG = /Period\s(?<period>[A-H]), Lunch\s(?<lunch>[1-3])\s\(Section\s\d\)/;
-  var classes = {};
+  var classes = [null, null, null, null, null, null, null, null];
   
   for (let i = 0; i < courses.length; i++) {
     if (courses[i].section !== undefined) {
-      let info = courses[i].section.match(REG);
+      let info = courses[i].section.match(classroomFormat);
       if (info !== null) {
-        classes[courses[i].name] = {
-          "period": info.groups.period,
-          "lunch": info.groups.lunch
+        classes[letterToNum(info.groups.period)] = {
+          "name": courses[i].name,
+          "lunch": parseInt(info.groups.lunch, 10)
         }
       }
     } 
   }
-  for (const prop of Object.keys(classes)) {
-    console.log(prop);
-    console.log(classes[prop])
-  }
+
+  // for (const i of classes) {
+  //   console.log(i);    
+  // }
+
+}
+
+
+function letterToNum(letter) {
+  return letter.charCodeAt(0) - 65;
 }

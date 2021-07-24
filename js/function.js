@@ -1,55 +1,56 @@
-function brebeufDay(enterDate) {
+function brebeufDay(enteredDate) {
   // enter date object
   enteredDate.setHours(0,0,0,0);
-  var enteredTime = enteredDate.getTime();
+  const enteredTime = enteredDate.getTime();
 
-  var day_one = specialDates.firstDayFirstSem;
- 
-  for (let y in EXTENDED_BREAK) {
-    
-    let newDate = new Date(EXTENDED_BREAK[y][1]);
-    newDate.setDate(newDate.getDate() + 1);
-    
-    if (EXTENDED_BREAK[y][2] === "RESET" && enteredDate.getTime() > endDate.getTime()) day_one = new Date(newDate);
-  }
+  var dayOne = specialDates.firstDayFirstSem;
+  if (enteredTime >= specialDates.firstDaySecondSem.getTime()) dayOne = specialDates.firstDaySecondSem;
   
-  
-  var brebeufDay = 0;
-  var dayTest = new Date(day_one);
+  var brebeufDay = null;
 
-  if (enteredTime == day_one.getTime()) brebeufDay = 1;
-  else if (enteredTime < day_one.getTime()) brebeufDay = null;
-  else if (enteredDate.getDay() == 6 || enteredDate.getDay() == 0) brebeufDay = null;
+  if (enteredTime == dayOne.getTime()) brebeufDay = 1;
+  else if (enteredTime < dayOne.getTime() || enteredTime > specialDates.lastDay.getTime()) brebeufDay = null;
+  else if (!normalDay(enteredDate)) brebeufDay = null;
   else {
-    for (let s of specialDates.singleDays) {
-      if (enteredTime == s.getTime()) brebeufDay = null;
-    }
-    for (let e of specialDates.extendedBreak) {
-        if (enteredTime >= e[0].getTime() && enteredTime <= e[1].getTime()) brebeufDay = null;
-    }
-    
-    if (brebeufDay !== null) {
-      var dayCount = 0;
+    var dayCount = 0;
+    var dayTest = new Date(dayOne);
 
-      var testEntered = new Date(enteredDate);
-      testEntered.setDate(testEntered.getDate() + 1);
-      
-      while (dayTest.getTime() != testEntered.getTime()) {
+    var stopTest = new Date(enteredDate);
+    stopTest.setDate(stopTest.getDate() + 1);
 
-        if (!(dayTest.getDay() == 6 || dayTest.getDay() == 0)) {
-          var breakDay = false;
-          for (let y of specialDays) {
-            if (dayTest.getTime() == y.getTime()) breakDay = true;
-          }
-          if (!breakDay) dayCount ++;
-        } 
-        dayTest.setDate(dayTest.getDate() + 1);
-      }
-
-      brebeufDay = dayCount % 8;
+    while (dayTest.getTime() != stopTest.getTime()) {
+      if (normalDay(dayTest)) dayCount ++;
+      dayTest.setDate(dayTest.getDate() + 1);
     }
+
+    brebeufDay = dayCount % 8;
+    if (brebeufDay == 0) brebeufDay = 8;
   }
-  if (brebeufDay == 0) brebeufDay = 8;
 
   return brebeufDay;
+}
+
+function normalDay(enteredDate) {
+  // enter date object
+  var normal = true;
+  const enteredTime = enteredDate.getTime();
+  if (enteredDate.getDay() == 6 || enteredDate.getDay() == 0) normal = false;
+  else {
+    for (let days of specialDates.singleDays) {
+      if (enteredTime == days.getTime()) {
+        normal = false;
+        break;
+      }
+    }
+    if (normal) {
+      for (let breaks of specialDates.extendedBreak) {
+        if (enteredTime >= breaks[0].getTime() && enteredTime <= breaks[1].getTime()) {
+          normal = false;
+          break;
+        }
+      }
+    }
+  }
+
+  return normal;
 }
