@@ -1,4 +1,5 @@
 function getCourses() {
+  startLockout();
 	return gapi.client.classroom.courses.list({
 		"courseStates": "ACTIVE",
 		"studentId": "me"
@@ -17,14 +18,18 @@ function createCourses(response) {
     if (courses[i].section !== undefined) {
       let info = courses[i].section.match(classroomFormat);
       if (info !== null) {
-        classes[letterToNum(info.groups.period)] = {
-          "name": courses[i].name,
-          "lunch": parseInt(info.groups.lunch, 10)
-        }
+        //try {
+          input[letterToNum(info.groups.period)].value = courses[i].name;
+          radio[letterToNum(info.groups.period)][parseInt(info.groups.lunch, 10)-1].checked = true;
+          input[letterToNum(info.groups.period)+8].value = courses[i].name;
+          radio[letterToNum(info.groups.period)+8][parseInt(info.groups.lunch, 10)-1].checked = true;
+        /*} catch(err) {
+          console.log("Possibly incorrect information from Classroom");
+        }*/
       }
-    } 
+    }
   }
-  return checkExistingCalendar();
+  endLockout();
 }
 
 
