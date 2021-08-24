@@ -3,10 +3,20 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
+@media only screen and (max-width: 768px) {
+    body {
+      font-size: 20px;
+    }
+}
+
 .banner {
     height: 4em;
     border-bottom: 0.0625rem solid #e0e0e0;
     text-align: right;
+}
+
+.container {
+    padding: 0 1em;
 }
 
 .display {
