@@ -33,7 +33,7 @@ var radio = [
     [document.getElementById("14-1"), document.getElementById("14-2"), document.getElementById("14-3")],
     [document.getElementById("15-1"), document.getElementById("15-2"), document.getElementById("15-3")],
     [document.getElementById("16-1"), document.getElementById("16-2"), document.getElementById("16-3")],
-]
+];
 
 function remindRequired() {
     document.getElementById("check-required").style.display = "block";

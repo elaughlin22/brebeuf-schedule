@@ -1,12 +1,5 @@
 var errorPage = document.getElementById("error");
 
-function handleClientLoad() {
-  try{
-    gapi.load("client:auth2", start);
-  } catch(err) {
-  }
-}
-
 // need to hide as secret in github repo (restricted keys)
 const API_KEY = "AIzaSyD2M0TLLkXlK7TKFAG0dI7MgwhIJ4158Xk";
 
@@ -26,7 +19,12 @@ var page1 = document.getElementById("page1");
 var page2 = document.getElementById("page2");
 var lockout = document.getElementById("lockout");
 
-
+function handleClientLoad() {
+  try{
+    gapi.load("client:auth2", start);
+  } catch(err) {
+  }
+}
 
 function start() {
   gapi.client.init({
