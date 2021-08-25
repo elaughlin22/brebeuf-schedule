@@ -12,7 +12,7 @@ function checkExistingCalendar() {
             } else {
                 return remindRequired();
             }
-            var periodColor = $("input[name='"+i+"-color']:checked").val();
+            var periodColor = $("input[name='"+(i+1)+"-color']:checked").val();
             classes[i] = {
                 "name": input[i].value,
                 "lunch": lunch,
@@ -45,7 +45,6 @@ function checkExistingCalendar() {
     } else {
       createCalendar();
     }
-    // calendar color and alert  
   }
   
   function createCalendar() {
@@ -75,16 +74,15 @@ function batchEvents(calendarId) {
     for(v = 1; v < yearSchedule.result.values.length; v++) {
       m = yearSchedule.result.values[v][0];
       x = yearSchedule.result.values[v][1];
-      console.log(m.split("/")[0]);
       dayTest.setFullYear(m.split("/")[2], m.split("/")[0]-1, m.split("/")[1]);
       if(x >= 1 && x <= 8) {
         for(y = 0; y < normalSchedule.length-2; y++) {
           if (m.split("/")[2] > startYear) {
-            var periodNumber = classOrder[x-1][y]+8;
+            var periodNumber = classOrder[x-1][y]+7;
           } else {
-            var periodNumber = classOrder[x-1][y];
+            var periodNumber = classOrder[x-1][y]-1;
           }
-          if (classes[periodNumber] === undefined) {
+          if (classes[periodNumber] === null || classes[periodNumber] === undefined) {
             continue;
           }
           let startTime = new Date(dayTest);
@@ -144,59 +142,6 @@ function batchEvents(calendarId) {
       document.getElementById("success-message").style.display = "block";
     });
   }
-  // clear, lunch, color
-  
-  function brebeufDay(enteredDate) {
-    // enter date object
-    enteredDate.setHours(0,0,0,0);
-    const enteredTime = enteredDate.getTime();
-    var dayOne = specialDates.firstDayFirstSem;
-    if (enteredTime >= specialDates.firstDaySecondSem.getTime()) dayOne = specialDates.firstDaySecondSem;
-    
-    var brebeufDay = null;
-    if (enteredTime == dayOne.getTime()) brebeufDay = 1;
-    else if (enteredTime < dayOne.getTime() || enteredTime > specialDates.lastDay.getTime()) brebeufDay = null;
-    else if (!normalDay(enteredDate)) brebeufDay = null;
-    else {
-      var dayCount = 0;
-      var dayTest = new Date(dayOne);
-  
-      while (dayTest.getTime() <= enteredTime) {
-        if (normalDay(dayTest)) dayCount ++;
-        dayTest.setDate(dayTest.getDate() + 1);
-      }
-      brebeufDay = dayCount % 8;
-      if (brebeufDay == 0) brebeufDay = 8;
-    }
-  
-    return brebeufDay;
-  }
-  
-  
-  function normalDay(enteredDate) {
-    // enter date object
-    var normal = true;
-    const enteredTime = enteredDate.getTime();
-    if (enteredDate.getDay() == 6 || enteredDate.getDay() == 0) normal = false;
-    else {
-      for (let days of specialDates.singleDays) {
-        if (enteredTime == days.getTime()) {
-          normal = false;
-          break;
-        }
-      }
-      if (normal) {
-        for (let breaks of specialDates.extendedBreak) {
-          if (enteredTime >= breaks[0].getTime() && enteredTime <= breaks[1].getTime()) {
-            normal = false;
-            break;
-          }
-        }
-      }
-    }
-    return normal;
-  }
-  
   
   function createEvent(summary, color, firstDate, secondDate) {
     // pass in date objects
